@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e8">
+  <meta name="description" content="Mijn reisplannen voor Sankt Moritz, de Isle of Man TT, Dubai en IJsland. Met routes, praktische tips en links voor onderweg.">
+  <title>Verre Verlangens — mijn persoonlijke reisgids</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3ec;
+      --white: #fffcf6;
+      --ink: #202822;
+      --muted: #73776e;
+      --green: #254d3f;
+      --green-light: #e5ebe1;
+      --red: #a44334;
+      --line: #dedbd1;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { color: inherit; font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(1140px, calc(100% - 56px)); margin-inline: auto; }
+    .topline {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .topline-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 86px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--green);
+      border-radius: 50%;
+      color: var(--green);
+      font-family: var(--serif);
+      font-size: 19px;
+    }
+    .brand-name { font-family: var(--serif); font-size: 21px; letter-spacing: -.04em; }
+    .brand-caption { display: block; color: var(--muted); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
+    .top-note { color: var(--muted); font-size: 12px; }
+    .top-note span { color: var(--red); }
+    .nav {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding: 16px 0;
+      scrollbar-width: thin;
+    }
+    .nav button {
+      flex: 0 0 auto;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .nav button:hover { color: var(--green); }
+    .nav button[aria-selected="true"] { border-color: var(--line); background: var(--white); color: var(--green); }
+    .nav .nav-number { margin-right: 8px; color: var(--red); font-family: var(--serif); font-size: 12px; }
+    main { min-height: 65vh; }
+    .page { display: none; padding: 44px 0 82px; animation: appear .35s ease both; }
+    .page.active { display: block; }
+    @keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .eyebrow { color: var(--red); font-size: 10px; font-weight: 650; letter-spacing: .19em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; }
+    h1 { max-width: 650px; margin: 15px 0 20px; font-size: clamp(44px, 7.3vw, 84px); line-height: .99; letter-spacing: -.065em; }
+    h1 em, h2 em { color: var(--green); font-weight: 400; }
+    h2 { font-size: clamp(35px, 5vw, 57px); line-height: 1.08; letter-spacing: -.055em; }
+    h3 { margin-bottom: 8px; font-size: 23px; line-height: 1.2; }
+    .intro { max-width: 560px; color: #61675d; font-size: 16px; line-height: 1.85; }
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 355px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(ellipse at 81% 54%, rgba(233, 224, 200, .72), transparent 32%),
+        radial-gradient(ellipse at 83% 43%, rgba(195, 207, 181, .57), transparent 40%),
+        var(--white);
+    }
+    .hero-copy { position: relative; z-index: 1; padding: 50px 0 50px 57px; }
+    .hero-copy h1 { max-width: 580px; }
+    .hero-copy .intro { max-width: 460px; margin-bottom: 23px; }
+    .hero-art { position: relative; display: grid; height: 100%; min-height: 310px; place-items: center; }
+    .globe {
+      position: relative;
+      display: grid;
+      width: min(290px, 75%);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(37, 77, 63, .23);
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle at center, transparent 0 37px, rgba(37, 77, 63, .095) 38px 39px);
+    }
+    .globe::before, .globe::after { position: absolute; content: ""; border: 1px solid rgba(37, 77, 63, .18); border-radius: 50%; }
+    .globe::before { width: 63%; height: 100%; }
+    .globe::after { width: 100%; height: 38%; }
+    .globe-center { z-index: 1; display: grid; width: 94px; height: 94px; place-items: center; border-radius: 50%; background: var(--green); color: var(--white); font-family: var(--serif); font-size: 13px; text-align: center; line-height: 1.45; }
+    .pin { position: absolute; z-index: 2; width: 10px; height: 10px; border: 2px solid var(--white); border-radius: 50%; background: var(--red); box-shadow: 0 0 0 1px var(--red); }
+    .pin.one { top: 20%; left: 47%; }.pin.two { top: 43%; right: 12%; }.pin.three { bottom: 32%; left: 19%; }.pin.four { bottom: 17%; right: 30%; }
+    .route-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 0 55px; border: 1px solid var(--line); border-top: 0; background: var(--white); }
+    .route-item { padding: 18px 21px; border-right: 1px solid var(--line); }
+    .route-item:last-child { border-right: 0; }
+    .route-item span { display: block; color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+    .route-item strong { font-family: var(--serif); font-size: 18px; font-weight: 400; }
+    .route-item .stop { margin-right: 7px; color: var(--red); font-size: 11px; }
+    .guide-note + .section-heading { margin-top: 42px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+    .section-heading h2 { margin-bottom: 0; font-size: 37px; }
+    .section-heading p { max-width: 360px; margin-bottom: 4px; color: var(--muted); font-size: 13px; }
+    .place-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    .place-card {
+      position: relative;
+      display: flex;
+      min-height: 175px;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 23px 25px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--white);
+      text-align: left;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s;
+    }
+    .place-card:hover { transform: translateY(-3px); border-color: var(--green); }
+    .place-card::after { position: absolute; top: -45px; right: -25px; width: 142px; height: 142px; border: 1px solid rgba(37, 77, 63, .13); border-radius: 50%; content: ""; }
+    .place-card:nth-child(2)::after { border-radius: 50% 50% 0 50%; transform: rotate(25deg); }
+    .place-card-top { display: flex; justify-content: space-between; color: var(--red); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+    .place-card h3 { margin: 22px 0 3px; font-size: 28px; }
+    .place-card p { margin: 0; color: var(--muted); font-size: 12px; }
+    .place-arrow { color: var(--green); font-size: 18px; }
+    .quote { margin: 54px 0 0; padding: 30px 0 0; border-top: 1px solid var(--line); color: var(--green); font-family: var(--serif); font-size: 25px; }
+    .quote small { display: block; margin-top: 9px; color: var(--muted); font-family: var(--sans); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .destination-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 25px; margin: 0 0 31px; }
+    .destination-head h2 { margin: 9px 0 13px; }
+    .destination-head .intro { max-width: 660px; margin-bottom: 0; }
+    .stamp { display: grid; width: 96px; height: 96px; align-content: center; justify-items: center; border: 1px solid var(--green); border-radius: 50%; color: var(--green); font-family: var(--serif); font-size: 16px; line-height: 1.35; text-align: center; }
+    .stamp small { font-family: var(--sans); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+    .destination-banner { display: flex; min-height: 94px; align-items: center; justify-content: space-around; gap: 15px; margin-bottom: 34px; padding: 17px; border: 1px solid var(--line); background: var(--green); color: var(--white); }
+    .banner-detail { text-align: center; }
+    .banner-detail span { display: block; color: #c7d4c9; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .banner-detail strong { font-family: var(--serif); font-size: 17px; font-weight: 400; }
+    .banner-divider { color: #98ad9e; }
+    .content-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 42px; }
+    .place-grid + .content-grid { margin-top: 42px; }
+    .content-block { margin-bottom: 35px; }
+    .content-block > p { max-width: 660px; color: #62675f; }
+    .content-block h3 { padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    .timeline { margin: 16px 0 0; padding: 0; list-style: none; }
+    .timeline li { position: relative; display: grid; grid-template-columns: 76px 1fr; gap: 15px; padding: 0 0 20px 14px; border-left: 1px solid #bdc9bb; }
+    .timeline li:last-child { padding-bottom: 0; border-left-color: transparent; }
+    .timeline li::before { position: absolute; top: 7px; left: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--red); content: ""; }
+    .time-label { color: var(--green); font-size: 11px; font-weight: 650; }
+    .timeline strong { display: block; font-size: 13px; font-weight: 600; }
+    .timeline p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+    .side-card { margin-bottom: 15px; padding: 22px 23px; border: 1px solid var(--line); background: var(--white); }
+    .side-card h3 { font-size: 20px; }
+    .side-card p, .side-card li { color: #62675f; font-size: 12px; }
+    .side-card ul { margin: 10px 0 0; padding-left: 17px; }
+    .side-card li + li { margin-top: 7px; }
+    .guide-note { padding: 18px 20px; border-left: 3px solid var(--green); background: var(--green-light); color: #48554a; font-size: 12px; }
+    .guide-note strong { color: var(--green); }
+    .source-links { display: grid; gap: 9px; margin: 12px 0 0; padding: 0; list-style: none; }
+    .source-links li + li { margin-top: 0 !important; }
+    .source-links a { color: var(--green); font-size: 12px; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .source-links a:hover { color: var(--red); }
+    .season-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+    .season-card { padding: 14px 15px; border: 1px solid var(--line); background: var(--white); }
+    .season-card strong { display: block; margin-bottom: 4px; color: var(--green); font-size: 12px; }
+    .season-card span { color: var(--muted); font-size: 11px; }
+    .note-card { border-color: #d9c7ac; background: #f4eee3; }
+    .note-card .eyebrow { font-size: 9px; }
+    .detail-list { margin: 12px 0 0; padding: 0; list-style: none; }
+    .detail-list li { display: flex; justify-content: space-between; gap: 14px; padding: 9px 0; border-top: 1px solid var(--line); }
+    .detail-list span { color: var(--muted); }
+    .detail-list strong { color: var(--ink); font-weight: 550; text-align: right; }
+    .checklist { display: grid; gap: 10px; margin-top: 12px; }
+    .check-row { display: flex; align-items: start; gap: 9px; color: #62675f; font-size: 12px; cursor: pointer; }
+    .check-row input { margin-top: 5px; accent-color: var(--green); }
+    .check-row input:checked + span { color: var(--muted); text-decoration: line-through; }
+    .footer { padding: 20px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; }
+    .footer a { text-decoration: none; }
+    .footer a:hover { color: var(--green); }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 32px, 540px); }
+      .topline-inner { font-size: 9px; }
+      .masthead { min-height: 70px; }
+      .top-note { display: none; }
+      .nav { margin-inline: -16px; padding: 12px 16px; }
+      .nav button { padding: 8px 10px; font-size: 11px; }
+      .page { padding: 28px 0 55px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 36px 26px 5px; }
+      .hero-copy h1 { font-size: clamp(46px, 13vw, 70px); }
+      .hero-copy .intro { font-size: 14px; }
+      .hero-art { min-height: 240px; }
+      .globe { width: 195px; }
+      .route-strip { grid-template-columns: repeat(2, 1fr); margin-bottom: 39px; }
+      .route-item { padding: 13px 15px; }
+      .route-item:nth-child(2) { border-right: 0; }
+      .route-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .route-item strong { font-size: 16px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 8px; }
+      .section-heading h2 { font-size: 31px; }
+      .place-grid { grid-template-columns: 1fr; }
+      .place-card { min-height: 150px; }
+      .quote { margin-top: 38px; font-size: 21px; }
+      .destination-head { grid-template-columns: 1fr; }
+      .destination-head h2 { font-size: 47px; }
+      .stamp { display: none; }
+      .destination-banner { display: grid; grid-template-columns: 1fr 1fr; }
+      .banner-divider { display: none; }
+      .content-grid { grid-template-columns: 1fr; gap: 0; }
+      .footer-inner { flex-direction: column; gap: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    :root {
+      --paper: #f4f1e8;
+      --white: #fffdf8;
+      --ink: #1d2923;
+      --muted: #666961;
+      --green: #203d32;
+      --green-light: #e8ece4;
+      --red: #a44c38;
+      --line: #e2ded3;
+      --gold: #80643a;
+      --serif: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    }
+    body {
+      background:
+        radial-gradient(ellipse at 50% -18%, rgba(255, 255, 255, .86), transparent 49%),
+        var(--paper);
+      letter-spacing: .005em;
+    }
+    .topline { border-color: rgba(32, 61, 50, .13); font-size: 9px; }
+    header.shell {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      background: rgba(244, 241, 232, .93);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .masthead { min-height: 78px; border-bottom-color: rgba(32, 61, 50, .12); }
+    .brand-mark { width: 40px; height: 40px; border-color: var(--gold); color: var(--green); }
+    .brand-name { font-size: 23px; }
+    .brand-caption { margin-top: 2px; font-size: 8px; letter-spacing: .18em; }
+    .nav {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 9px 0 12px;
+      gap: 4px;
+    }
+    .nav button { padding: 8px 15px; border-radius: 999px; font-size: 11px; }
+    .nav button[aria-selected="true"] {
+      border-color: transparent;
+      background: var(--green);
+      color: #fffdf8;
+      box-shadow: 0 3px 12px rgba(32, 61, 50, .12);
+    }
+    .nav button[aria-selected="true"] .nav-number { color: #ddc69b; }
+    .nav .nav-number { color: var(--gold); }
+    .page { padding-top: 36px; }
+    .eyebrow { color: var(--gold); font-size: 9px; letter-spacing: .21em; }
+    h1, h2, h3 { letter-spacing: -.035em; }
+    h1 { font-size: clamp(52px, 7.7vw, 91px); line-height: .96; }
+    h2 { font-size: clamp(40px, 5.2vw, 62px); }
+    .hero {
+      min-height: 440px;
+      border: 0;
+      border-radius: 5px;
+      background:
+        radial-gradient(ellipse at 84% 47%, rgba(185, 157, 105, .2), transparent 31%),
+        radial-gradient(ellipse at 76% 93%, rgba(94, 122, 102, .36), transparent 37%),
+        linear-gradient(115deg, #1d342b 1%, #223d32 55%, #29473a 100%);
+      box-shadow: 0 22px 56px rgba(37, 48, 39, .13);
+    }
+    .hero::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(20, 39, 31, .12), transparent 70%);
+      content: "";
+      pointer-events: none;
+    }
+    .hero-copy { padding-left: 66px; }
+    .hero-copy h1 { max-width: 620px; margin-top: 19px; color: #fffdf8; }
+    .hero-copy h1 em { color: #dcc69e; font-style: italic; }
+    .hero-copy .intro { max-width: 470px; color: rgba(255, 253, 248, .77); font-size: 15px; }
+    .hero-copy > .eyebrow:last-child { color: #d7c7a6; }
+    .hero-art { z-index: 1; }
+    .globe {
+      width: min(335px, 83%);
+      border-color: rgba(223, 204, 165, .3);
+      background: repeating-radial-gradient(circle at center, transparent 0 42px, rgba(236, 221, 190, .11) 43px 44px);
+      box-shadow: 0 0 90px rgba(210, 184, 132, .1);
+    }
+    .globe::before, .globe::after { border-color: rgba(223, 204, 165, .23); }
+    .globe-center {
+      width: 103px;
+      height: 103px;
+      border: 1px solid rgba(226, 205, 164, .45);
+      background: #29473a;
+      color: #f1e7d2;
+      font-size: 14px;
+    }
+    .pin { border-color: #284236; background: #d5b77f; box-shadow: 0 0 0 1px #d5b77f, 0 0 18px rgba(213, 183, 127, .6); }
+    .route-strip {
+      position: relative;
+      margin: 0 0 68px;
+      border: 1px solid rgba(32, 61, 50, .12);
+      border-top: 0;
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0 9px 26px rgba(37, 48, 39, .045);
+    }
+    .route-item { padding: 20px 21px; }
+    .route-item span { font-size: 9px; letter-spacing: .13em; }
+    .route-item strong { font-size: 19px; }
+    .route-item .stop { color: var(--gold); }
+    .guide-note {
+      border: 1px solid rgba(179, 148, 96, .24);
+      border-left: 3px solid var(--gold);
+      border-radius: 3px;
+      background: rgba(255, 253, 248, .72);
+      box-shadow: 0 6px 22px rgba(37, 48, 39, .035);
+      line-height: 1.8;
+    }
+    .guide-note strong { color: var(--green); }
+    .guide-note + .section-heading { margin-top: 56px; }
+    .section-heading { margin-bottom: 27px; }
+    .section-heading h2 { font-size: 40px; }
+    .section-heading h2 em { color: var(--green); font-style: italic; }
+    .section-heading p { max-width: 390px; line-height: 1.8; }
+    .place-grid { gap: 16px; }
+    .place-card {
+      min-height: 206px;
+      padding: 25px 27px;
+      border-color: rgba(32, 61, 50, .11);
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse at 97% 4%, rgba(205, 185, 147, .18), transparent 40%),
+        var(--white);
+      box-shadow: 0 7px 24px rgba(37, 48, 39, .045);
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+    }
+    .place-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(179, 148, 96, .55);
+      box-shadow: 0 15px 34px rgba(37, 48, 39, .1);
+    }
+    .place-card::after {
+      top: -34px;
+      right: -14px;
+      width: 160px;
+      height: 160px;
+      border-color: rgba(179, 148, 96, .22);
+    }
+    .place-card:nth-child(2)::after { border-color: rgba(164, 76, 56, .19); }
+    .place-card:nth-child(3)::after { border-color: rgba(179, 148, 96, .28); }
+    .place-card:nth-child(4)::after { border-color: rgba(71, 107, 118, .22); }
+    .place-card-top { color: var(--gold); font-size: 9px; letter-spacing: .16em; }
+    .place-card:nth-child(2) .place-card-top { color: #a44c38; }
+    .place-card h3 { margin-top: 31px; font-size: 32px; }
+    .place-card p { color: #72756c; font-size: 13px; }
+    .place-arrow { font-size: 20px; }
+    .place-grid + .content-grid { margin-top: 56px; }
+    .content-block { margin-bottom: 42px; }
+    .content-block h3 { padding-bottom: 14px; border-bottom-color: rgba(32, 61, 50, .13); font-size: 27px; }
+    .content-block > p { line-height: 1.9; }
+    .destination-head { margin-bottom: 35px; }
+    .destination-head h2 { margin: 13px 0 16px; }
+    .destination-head h2 em { color: var(--green); font-style: italic; }
+    .destination-head .intro { font-size: 15px; }
+    .stamp {
+      width: 112px;
+      height: 112px;
+      border-color: var(--gold);
+      color: var(--green);
+      background: rgba(255, 253, 248, .55);
+      font-size: 17px;
+      box-shadow: inset 0 0 0 5px rgba(179, 148, 96, .08);
+    }
+    .stamp small { color: var(--gold); font-size: 8px; }
+    .destination-art {
+      position: relative;
+      height: clamp(190px, 24vw, 270px);
+      margin: 0 0 20px;
+      overflow: hidden;
+      border: 1px solid rgba(32, 61, 50, .1);
+      border-radius: 4px;
+      background: var(--green);
+      box-shadow: 0 16px 38px rgba(37, 48, 39, .12);
+      isolation: isolate;
+    }
+    .art-photo { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .art-man .art-photo { object-fit: contain; background: #193329; }
+    .destination-art::after {
+      position: absolute;
+      z-index: 1;
+      inset: 30% 0 0;
+      background: linear-gradient(0deg, rgba(17, 31, 26, .72), transparent);
+      content: "";
+      pointer-events: none;
+    }
+    .art-caption {
+      position: absolute;
+      z-index: 2;
+      right: 28px;
+      bottom: 20px;
+      left: 28px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      color: #fffdf8;
+    }
+    .art-caption span { color: #e4d1aa; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
+    .art-caption strong { font-family: var(--serif); font-size: clamp(20px, 3vw, 29px); font-weight: 400; letter-spacing: -.025em; }
+    .art-coordinates { color: rgba(255, 253, 248, .75) !important; text-align: right; }
+    .art-moritz svg { background: #91a99f; }
+    .art-man svg { background: #738c91; }
+    .art-dubai svg { background: #bc856b; }
+    .art-iceland svg { background: #233d45; }
+    .destination-banner {
+      min-height: 105px;
+      margin-bottom: 42px;
+      border: 1px solid rgba(216, 199, 160, .24);
+      border-radius: 4px;
+      background:
+        radial-gradient(ellipse at 88% 0%, rgba(180, 151, 100, .15), transparent 38%),
+        linear-gradient(105deg, #1e392f, #28483a);
+      box-shadow: 0 12px 30px rgba(32, 61, 50, .12);
+    }
+    .banner-detail span { color: #cfbea0; font-size: 8px; letter-spacing: .16em; }
+    .banner-detail strong { color: #fffdf8; font-size: 18px; }
+    .banner-divider { color: #c4a873; }
+    .content-grid { gap: 48px; }
+    .timeline li { grid-template-columns: 72px 1fr; padding-bottom: 24px; }
+    .time-label { color: var(--gold); font-size: 10px; letter-spacing: .08em; }
+    .timeline li::before { background: var(--gold); box-shadow: 0 0 0 3px var(--paper); }
+    .timeline strong { color: var(--green); font-size: 14px; }
+    .timeline p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .side-card {
+      margin-bottom: 17px;
+      padding: 24px 25px;
+      border-color: rgba(32, 61, 50, .11);
+      border-radius: 4px;
+      box-shadow: 0 7px 23px rgba(37, 48, 39, .045);
+    }
+    .side-card h3 { margin-bottom: 12px; color: var(--green); font-size: 23px; }
+    .side-card p, .side-card li { font-size: 13px; line-height: 1.8; }
+    .side-card li + li { margin-top: 9px; }
+    .side-card .detail-list li { margin-top: 0; }
+    .detail-list li { padding: 10px 0; }
+    .detail-list span { font-size: 12px; }
+    .detail-list strong { font-size: 12px; }
+    .note-card { border-color: rgba(179, 148, 96, .35); background: #f6f0e4; }
+    .season-card { border-color: rgba(32, 61, 50, .1); border-radius: 3px; }
+    .season-card strong { color: var(--gold); }
+    .check-row { font-size: 13px; }
+    .check-row input { accent-color: var(--gold); }
+    .source-links a { font-size: 13px; }
+    .quote { margin-top: 65px; padding-top: 34px; border-top-color: rgba(32, 61, 50, .17); color: var(--green); font-size: 29px; }
+    .quote small { color: var(--gold); }
+    .footer { padding: 24px 0; border-top-color: rgba(32, 61, 50, .13); }
+    @media (max-width: 720px) {
+      header.shell { width: 100%; padding-inline: 16px; }
+      .masthead { min-height: 70px; }
+      .brand-name { font-size: 21px; }
+      .nav { width: calc(100% + 32px); max-width: none; margin-inline: -16px; padding: 10px 16px 13px; border-radius: 0; }
+      .nav button { padding: 8px 12px; }
+      .page { padding-top: 22px; }
+      .hero { min-height: 0; }
+      .hero-copy { padding: 36px 25px 5px; }
+      .hero-copy h1 { font-size: clamp(49px, 13vw, 70px); }
+      .hero-copy .intro { font-size: 14px; }
+      .hero-art { min-height: 235px; }
+      .globe { width: 196px; }
+      .route-strip { margin-bottom: 45px; }
+      .route-item { padding: 15px 13px; }
+      .route-item strong { font-size: 16px; }
+      .guide-note + .section-heading { margin-top: 40px; }
+      .section-heading h2 { font-size: 34px; }
+      .place-grid { gap: 12px; }
+      .place-card { min-height: 167px; padding: 21px 22px; }
+      .place-card h3 { margin-top: 21px; font-size: 29px; }
+      .place-grid + .content-grid { margin-top: 40px; }
+      .destination-head { margin-bottom: 25px; }
+      .destination-head h2 { font-size: 48px; }
+      .destination-art { height: 190px; }
+      .art-caption { right: 17px; bottom: 15px; left: 17px; align-items: start; flex-direction: column; gap: 5px; }
+      .art-caption strong { font-size: 22px; }
+      .art-coordinates { display: none; }
+      .destination-banner { margin-bottom: 30px; }
+      .banner-detail { padding: 5px; }
+      .banner-detail strong { font-size: 16px; }
+      .content-grid { gap: 0; }
+      .content-block h3 { font-size: 24px; }
+      .side-card { padding: 20px; }
+      .quote { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">
+    <div class="shell topline-inner"><span>Mijn persoonlijke reisgids</span><span>Vier bestemmingen · Routes, tips &amp; voorbereiding</span></div>
+  </div>
+  <header class="shell">
+    <div class="masthead">
+      <a class="brand" href="#home" data-page="home" aria-label="Verre Verlangens, startpagina">
+        <span class="brand-mark" aria-hidden="true">V</span>
+        <span><span class="brand-name">Verre Verlangens</span><span class="brand-caption">Mijn wereldreis · mijn reisgids</span></span>
+      </a>
+      <div class="top-note">Vier plekken waar ik <span>graag heen wil.</span></div>
+    </div>
+    <nav class="nav" role="tablist" aria-label="Mijn reisbestemmingen">
+      <button id="tab-home" role="tab" aria-selected="true" aria-controls="home" data-page="home"><span class="nav-number">00</span>Start</button>
+      <button id="tab-moritz" role="tab" aria-selected="false" aria-controls="moritz" data-page="moritz"><span class="nav-number">01</span>Sankt Moritz</button>
+      <button id="tab-man" role="tab" aria-selected="false" aria-controls="man" data-page="man"><span class="nav-number">02</span>Isle of Man · TT</button>
+      <button id="tab-dubai" role="tab" aria-selected="false" aria-controls="dubai" data-page="dubai"><span class="nav-number">03</span>Dubai</button>
+      <button id="tab-iceland" role="tab" aria-selected="false" aria-controls="iceland" data-page="iceland"><span class="nav-number">04</span>IJsland</button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page active" id="home" role="tabpanel" aria-labelledby="tab-home">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Vier reizen op mijn verlanglijst</div>
+          <h1>Vier plekken die<br>ik graag <em>wil zien.</em></h1>
+          <p class="intro">Sankt Moritz, de TT op Isle of Man, Dubai en IJsland: vier heel verschillende reizen die ik ooit wil maken. Hier verzamel ik ideeën voor onderweg, plekken om te bezoeken en dingen die ik vooraf moet uitzoeken.</p>
+          <div class="eyebrow">Mijn lijst groeit met elke reis.</div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Een gestileerde globe met vier markeringen voor de reisbestemmingen">
+          <div class="globe"><span class="globe-center">de wereld<br>ligt open</span><i class="pin one"></i><i class="pin two"></i><i class="pin three"></i><i class="pin four"></i></div>
+        </div>
+      </div>
+      <div class="route-strip" aria-label="De vier bestemmingen">
+        <div class="route-item"><span><i class="stop">01</i> Zwitserland</span><strong>Sankt Moritz</strong></div>
+        <div class="route-item"><span><i class="stop">02</i> Ierse Zee</span><strong>Isle of Man · TT</strong></div>
+        <div class="route-item"><span><i class="stop">03</i> Verenigde Arabische Emiraten</span><strong>Dubai</strong></div>
+        <div class="route-item"><span><i class="stop">04</i> Noord-Atlantische Oceaan</span><strong>IJsland</strong></div>
+      </div>
+      <div class="guide-note"><strong>Even kijken?</strong> Kies een bestemming voor mijn route-ideeën, tips over vervoer en verblijf en een checklist. Data, prijzen en openingstijden kunnen veranderen, dus die controleer ik als ik mijn reis ga plannen.</div>
+      <div class="section-heading">
+        <h2>Waar wil ik <em>heen?</em></h2>
+        <p>Van bergmeren tot woestijn en van motoren tot watervallen. Dit staat er op mijn lijstje.</p>
+      </div>
+      <div class="place-grid">
+        <button class="place-card" type="button" data-page="moritz"><span class="place-card-top"><span>01 · Zwitserland</span><span class="place-arrow">↗</span></span><span><h3>Sankt Moritz</h3><p>De Bernina-trein, bergmeren en THE ICE.</p></span></button>
+        <button class="place-card" type="button" data-page="man"><span class="place-card-top"><span>02 · Isle of Man</span><span class="place-arrow">↗</span></span><span><h3>De TT-races</h3><p>De race eens zelf vanaf het eiland meemaken.</p></span></button>
+        <button class="place-card" type="button" data-page="dubai"><span class="place-card-top"><span>03 · Verenigde Arabische Emiraten</span><span class="place-arrow">↗</span></span><span><h3>Dubai</h3><p>De oude Creek, de stad en de woestijn.</p></span></button>
+        <button class="place-card" type="button" data-page="iceland"><span class="place-card-top"><span>04 · Noord-Atlantische Oceaan</span><span class="place-arrow">↗</span></span><span><h3>IJsland</h3><p>Watervallen, warmwaterbronnen en de zuidkust.</p></span></button>
+      </div>
+      <div class="content-grid">
+        <div class="content-block"><h3>Voor ik mijn koffers pak</h3><p>Dit zijn vier losse reizen; ze vormen samen geen route. Eerst kies ik wanneer ik wil gaan. Daarna kijk ik naar vervoer en verblijf en boek ik dingen die snel vol zitten. Omdat prijzen, regels en dienstregelingen kunnen veranderen, controleer ik die informatie opnieuw voordat ik iets vastleg.</p><p>Ook kijk ik naar mijn paspoort, eventuele visumregels, reisverzekering en het reisadvies. Mijn reserveringen en belangrijke telefoonnummers bewaar ik ook offline.</p></div>
+        <aside class="side-card"><h3>Voor vertrek</h3><div class="checklist" data-list="trip"><label class="check-row"><input type="checkbox" data-key="trip-passport"><span>Paspoort en inreisregels controleren</span></label><label class="check-row"><input type="checkbox" data-key="trip-insurance"><span>Reisverzekering en dekking nakijken</span></label><label class="check-row"><input type="checkbox" data-key="trip-bookings"><span>Vervoer en eerste overnachtingen boeken</span></label><label class="check-row"><input type="checkbox" data-key="trip-advice"><span>Reisadvies bekijken</span></label><label class="check-row"><input type="checkbox" data-key="trip-offline"><span>Reserveringen en noodnummers offline bewaren</span></label></div></aside>
+      </div>
+      <blockquote class="quote">Vier plekken. Nu nog de juiste momenten vinden.<small>Mijn reisplannen</small></blockquote>
+    </section>
+
+    <section class="page" id="moritz" role="tabpanel" aria-labelledby="tab-moritz" hidden>
+      <div class="destination-head">
+        <div><div class="eyebrow">01 · Graubünden, Zwitserland</div><h2>Sankt <em>Moritz.</em></h2><p class="intro">Ik wil de bergen zien, met de Bernina-trein door het dal reizen en in de winter THE ICE meemaken. En natuurlijk wil ik ook gewoon even aan het meer zitten.</p></div>
+        <div class="stamp"><small>op mijn lijst</small>Engadin<br>1.856 m</div>
+      </div>
+      <figure class="destination-art art-moritz">
+        <img class="art-photo" src="assets/images/sankt-moritz-the-ice.jpg" alt="Raceauto’s rijden over het besneeuwde meer van Sankt Moritz, met het dorp en de Alpen op de achtergrond" width="1152" height="768" loading="lazy" decoding="async">
+        <figcaption class="art-caption"><span>01 · Graubünden · Zwitserland</span><strong>THE ICE op het meer</strong><span class="art-coordinates">46°29′ N &nbsp;·&nbsp; 9°50′ E</span></figcaption>
+      </figure>
+      <div class="destination-banner"><div class="banner-detail"><span>Hoe lang</span><strong>6 dagen</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>In de winter</span><strong>THE ICE</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Vervoer</span><strong>Trein · bergbaan</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Valuta</span><strong>Zwitserse frank</strong></div></div>
+      <div class="content-grid">
+        <div>
+          <div class="content-block"><h3>Zes dagen in het Engadin</h3>
+            <ol class="timeline">
+              <li><span class="time-label">Dag 1</span><div><strong>Aankomst in het Engadin</strong><p>Ik reis met de Rhätische Bahn naar Sankt Moritz, check in en maak een eerste wandeling langs het meer. Daarna rustig eten en op tijd naar bed.</p></div></li>
+              <li><span class="time-label">Dag 2</span><div><strong>THE ICE op het bevroren meer</strong><p>Vandaag wil ik THE ICE bezoeken en de klassieke auto’s op het bevroren meer bekijken. Ik plan mijn verblijf rond de officiële evenementendatum en volg ter plekke de aanwijzingen van de organisatie. De toegang tot het ijs is alleen toegestaan waar dat wordt aangegeven. Het programma kan veranderen als de ijs- of weersomstandigheden niet veilig zijn.</p></div></li>
+              <li><span class="time-label">Dag 3</span><div><strong>Met de bergbaan naar Muottas Muragl</strong><p>Ik neem de bergbaan omhoog voor het uitzicht over het Engadin. Als het weer en de paden het toelaten, maak ik een korte wandeling en lunch ik boven. In de winter controleer ik vooraf of de baan rijdt.</p></div></li>
+              <li><span class="time-label">Dag 4</span><div><strong>Met de Bernina-trein naar Tirano</strong><p>Ik maak er een dagtocht van en stap op de trein richting Tirano. Onderweg let ik op de viaducten, de Berninapas en het uitzicht op de gletsjers. Vooraf controleer ik de dienstregeling en of ik een zitplaats moet reserveren.</p></div></li>
+              <li><span class="time-label">Dag 5</span><div><strong>Een dag in Val Fex</strong><p>Ik reis naar Sils Maria en verken Val Fex te voet of, als dat past, met een paardenkoets. Ik houd het tempo rustig en kies in de winter alleen routes die op dat moment veilig en open zijn.</p></div></li>
+              <li><span class="time-label">Dag 6</span><div><strong>Laatste ochtend in Sankt Moritz</strong><p>Ik ontbijt rustig, maak nog een rondje langs het meer en neem daarna de trein verder. Voor vertrek controleer ik de dienstregeling en houd ik wat speling aan.</p></div></li>
+            </ol>
+          </div>
+          <div class="content-block"><h3>THE ICE bezoeken</h3><p>Ik wil THE ICE graag eens zien: klassieke auto’s op het bevroren meer, met de bergen op de achtergrond. Daarvoor moet ik mijn reis op de evenementendatum plannen. De datum, kaartverkoop en regels verschillen per editie, dus die controleer ik bij de organisatie. Ook het weer en de staat van het ijs kunnen het programma beïnvloeden. Op het ijs ga ik alleen op plekken die voor bezoekers zijn opengesteld. Ben ik er op een andere datum, dan maak ik van die dag een winterwandeling of sneeuwschoentocht.</p></div>
+          <div class="content-block"><h3>Waar ik kan verblijven</h3><p><strong>Sankt Moritz Dorf</strong> is handig voor winkels, restaurants en de bergbanen; <strong>St. Moritz Bad</strong> ligt bij het meer. Ik kijk ook naar Celerina, Samedan en Pontresina. Die plaatsen zijn wat rustiger en soms voordeliger, maar ik controleer wel hoe laat de trein of bus teruggaat. Vanuit Zürich reis ik per trein via Chur of Landquart. Voor de Bernina-lijn zoek ik de dienstregeling op en reserveer ik waar dat nodig is.</p></div>
+          <div class="content-block"><h3>Winter of zomer?</h3><div class="season-grid"><div class="season-card"><strong>Winter · THE ICE</strong><span>Voor sneeuw, wintersport en het evenement op het meer. Controleer evenementdatum, ijscondities, liften en winterpaden.</span></div><div class="season-card"><strong>Zomer · bergmeren</strong><span>Voor wandelingen, bergliften en lange dagen. Controleer openingstijden en het weer op hoogte.</span></div></div></div>
+          <div class="content-block"><h3>Wat ik er wil proeven</h3><p>Engadiner notentaart bij de koffie en pizzoccheri na een wandeling staan op mijn lijstje. En ik wil ook tijd overhouden om gewoon ergens aan het meer te zitten, zonder dat ik alweer op weg moet naar de volgende bezienswaardigheid.</p></div>
+        </div>
+        <aside>
+          <div class="side-card"><h3>Praktische informatie</h3><ul class="detail-list"><li><span>Aankomen</span><strong>Trein via Chur</strong></li><li><span>Rondreizen</span><strong>RhB, bus &amp; te voet</strong></li><li><span>Inpakken</span><strong>Laagjes, zonnebril, wandelschoenen</strong></li><li><span>Handig om te weten</span><strong>Even wennen aan de hoogte</strong></li></ul></div>
+          <div class="side-card"><h3>Voor vertrek controleren</h3><ul><li>Treinverbinding, werkzaamheden en eventuele zitplaatsreservering.</li><li>Openingstijden van bergbanen en wandelpaden voor mijn reisdatum.</li><li>THE ICE-datum, tickets en actuele instructies als ik voor het evenement kom.</li><li>Weersverwachting op hoogte; neem laagjes en geschikte schoenen mee.</li></ul></div>
+          <div class="side-card"><h3>Op mijn lijstje</h3><div class="checklist" data-list="moritz"><label class="check-row"><input type="checkbox" data-key="moritz-train"><span>Treinroute via Chur opslaan</span></label><label class="check-row"><input type="checkbox" data-key="moritz-bernina"><span>Bernina-trein en reservering uitzoeken</span></label><label class="check-row"><input type="checkbox" data-key="moritz-stay"><span>Een verblijf in de buurt zoeken</span></label></div></div>
+          <div class="side-card"><h3>Voor THE ICE regelen</h3><p>Ik kijk eerst wanneer de volgende editie is. Daarna zoek ik uit wanneer de kaartverkoop start en hoe ik op de dag zelf bij het evenement kom. Het programma kan van het weer afhangen, dus ik houd mijn planning flexibel.</p><div class="checklist" data-list="moritz"><label class="check-row"><input type="checkbox" data-key="moritz-the-ice"><span>Datum en kaartverkoop bekijken</span></label></div></div>
+          <div class="side-card note-card"><div class="eyebrow">Goed om te weten</div><p>Voor de Bernina-trein kijk ik de dienstregeling en eventuele zitplaatsreservering ruim van tevoren na. Zo houd ik de dag vrij voor de treinrit zelf.</p></div>
+          <div class="side-card"><h3>Officiële links</h3><ul class="source-links"><li><a href="https://www.stmoritz.com/en/" target="_blank" rel="noopener noreferrer">St. Moritz: bestemming &amp; activiteiten ↗</a></li><li><a href="https://www.the-ice.com/" target="_blank" rel="noopener noreferrer">THE ICE: evenementinformatie ↗</a></li><li><a href="https://www.rhb.ch/en/" target="_blank" rel="noopener noreferrer">Rhätische Bahn: treinen &amp; Bernina-lijn ↗</a></li><li><a href="https://www.myswitzerland.com/en/" target="_blank" rel="noopener noreferrer">My Switzerland: reisplanning ↗</a></li></ul></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="man" role="tabpanel" aria-labelledby="tab-man" hidden>
+      <div class="destination-head">
+        <div><div class="eyebrow">02 · Isle of Man · Ierse Zee</div><h2>Isle of Man <em>&amp; de TT.</em></h2><p class="intro">Ik wil de TT-races graag eens vanaf het eiland bekijken. En als ik er toch ben, wil ik ook Douglas, de kust en de rest van het eiland zien.</p></div>
+        <div class="stamp"><small>op mijn lijst</small>Isle of<br>Man</div>
+      </div>
+      <figure class="destination-art art-man">
+        <img class="art-photo" src="assets/images/isle-of-man-tt.png" alt="Motorrijder racet over een smalle, door heggen omgeven weg tijdens een Isle of Man TT-race" width="768" height="768" loading="lazy" decoding="async">
+        <figcaption class="art-caption"><span>02 · Isle of Man · Ierse Zee</span><strong>De TT-races</strong><span class="art-coordinates">Douglas → Mountain Course</span></figcaption>
+      </figure>
+      <div class="destination-banner"><div class="banner-detail"><span>Hoe lang</span><strong>5–7 dagen</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Tijdens de TT</span><strong>Vroeg boeken</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Vervoer</span><strong>Veerboot · trein</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Valuta</span><strong>Manx pond / GBP</strong></div></div>
+      <div class="content-grid">
+        <div>
+          <div class="content-block"><h3>Een week op Isle of Man</h3>
+            <ol class="timeline">
+              <li><span class="time-label">Dag 1</span><div><strong>Aankomst in Douglas</strong><p>Ik neem de veerboot vanuit Heysham of Liverpool. Na aankomst wandel ik langs de promenade en kijk ik hoe ik me de rest van de week ga verplaatsen.</p></div></li>
+              <li><span class="time-label">Dag 2</span><div><strong>Douglas en de tram naar Laxey</strong><p>Ik verken Douglas en neem de Manx Electric Railway langs de oostkust. In Laxey bezoek ik de Great Laxey Wheel als die open is.</p></div></li>
+              <li><span class="time-label">Dag 3</span><div><strong>Een dag bij de TT</strong><p>Ik zoek vooraf een toegestane kijkplek uit en ga er op tijd heen, voordat de Mountain Course wordt afgesloten. Ik controleer de regels en het weer en volg de aanwijzingen van de marshals.</p></div></li>
+              <li><span class="time-label">Dag 4</span><div><strong>Peel en de westkust</strong><p>Ik bezoek Peel Castle en loop langs de haven. Als het weer meezit, maak ik een wandeling langs de kust.</p></div></li>
+              <li><span class="time-label">Dag 5</span><div><strong>Met de stoomtrein naar Port Erin</strong><p>Ik neem de Isle of Man Steam Railway naar het zuiden. Bij goed weer loop ik door naar Bradda Head; anders houd ik het bij Port Erin.</p></div></li>
+              <li><span class="time-label">Dag 6–7</span><div><strong>Een vrije dag en terug naar huis</strong><p>Ik houd een dag over voor een extra racesessie, het Manx Museum of een plek waar ik nog niet aan toegekomen ben. Daarna neem ik de boot terug; ik plan genoeg tijd voor de haven.</p></div></li>
+            </ol>
+          </div>
+          <div class="content-block"><h3>Welke TT-dagen kies ik?</h3><p>De TT duurt meestal ongeveer twee weken. Eerst zijn er kwalificaties, daarna de races. Ik bekijk het programma zodra de data bekend zijn: misschien past een kwalificatiedag beter, misschien wil ik juist een racedag meemaken. Het schema verschilt per jaar. De Mountain Course loopt over openbare wegen die tijdens sessies worden afgesloten. Ik blijf achter de afzettingen, ga de baan nooit op en luister altijd naar de marshals.</p></div>
+          <div class="content-block"><h3>Waar ik verblijf</h3><p><strong>Douglas</strong> lijkt me een handige uitvalsbasis: de veerboot komt er aan en ik kan er de bus, elektrische tram en stoomtrein nemen. Tijdens de TT zal het druk zijn, dus zodra de data bekend zijn wil ik mijn overtocht en verblijf regelen. Ik controleer de dienstregeling goed, want door de races kunnen wegen en routes tijdelijk dicht zijn.</p></div>
+        </div>
+        <aside>
+          <div class="side-card"><h3>Rond de TT</h3><ul><li>De data en sessies veranderen per editie; ik controleer het programma bij de TT-organisatie.</li><li>Ik boek de veerboot en mijn verblijf zodra mijn reisdata vaststaan.</li><li>Rond de races zijn er wegafsluitingen, dus ik plan mijn verplaatsingen daaromheen.</li><li>Ik bekijk de races alleen vanaf toegestane plekken en volg de aanwijzingen ter plaatse.</li></ul></div>
+          <div class="side-card"><h3>Naar het eiland reizen</h3><p>De veerboot naar Douglas vertrekt onder meer vanuit Heysham en Liverpool. Ik vergelijk de vaartijden, vertrekhaven en voorwaarden; ook de plek voor mijn auto reserveer ik op tijd. Vliegen kan ook, maar ik controleer eerst welke verbindingen er op mijn reisdata zijn.</p></div>
+          <div class="side-card"><h3>Praktische informatie</h3><ul class="detail-list"><li><span>Aankomen</span><strong>Veerboot naar Douglas</strong></li><li><span>Rondreizen</span><strong>Bus, trein &amp; tram</strong></li><li><span>TT-periode</span><strong>Data jaarlijks controleren</strong></li><li><span>Betalen</span><strong>Pond sterling (GBP)</strong></li><li><span>Inpakken</span><strong>Regenjas en oordoppen</strong></li></ul><p>Manx-bankbiljetten zijn aan het pond sterling gekoppeld, maar worden buiten het eiland niet overal geaccepteerd. Ik geef ze dus liever uit voordat ik weer vertrek.</p></div>
+          <div class="side-card"><h3>Op mijn lijstje</h3><div class="checklist" data-list="man"><label class="check-row"><input type="checkbox" data-key="man-calendar"><span>TT-data en programma bekijken</span></label><label class="check-row"><input type="checkbox" data-key="man-ferry"><span>Overtocht en verblijf uitzoeken</span></label><label class="check-row"><input type="checkbox" data-key="man-view"><span>Een kijkplek en vervoer kiezen</span></label></div></div>
+          <div class="side-card"><h3>Handige officiële links</h3><ul class="source-links"><li><a href="https://www.iomtt.com/" target="_blank" rel="noopener noreferrer">Isle of Man TT: kalender &amp; bezoekersinformatie ↗</a></li><li><a href="https://www.steam-packet.com/" target="_blank" rel="noopener noreferrer">Isle of Man Steam Packet: veerboot ↗</a></li><li><a href="https://www.visitisleofman.com/" target="_blank" rel="noopener noreferrer">Visit Isle of Man: vervoer &amp; activiteiten ↗</a></li><li><a href="https://www.iombusandrail.im/" target="_blank" rel="noopener noreferrer">Isle of Man Bus and Rail: dienstregelingen ↗</a></li></ul></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="dubai" role="tabpanel" aria-labelledby="tab-dubai" hidden>
+      <div class="destination-head">
+        <div><div class="eyebrow">03 · Verenigde Arabische Emiraten</div><h2>Een paar dagen <em>Dubai.</em></h2><p class="intro">In Dubai wil ik meer zien dan de hoge torens. Ik wil door Al Fahidi lopen, met een abra de Creek oversteken en ook een dag buiten de stad doorbrengen.</p></div>
+        <div class="stamp"><small>op mijn lijst</small>Stad<br>&amp; woestijn</div>
+      </div>
+      <figure class="destination-art art-dubai">
+        <img class="art-photo" src="assets/images/dubai-skyline.png" alt="De verlichte skyline van Dubai bij zonsondergang, met de Burj Khalifa tussen de wolkenkrabbers" width="1365" height="768" loading="lazy" decoding="async">
+        <figcaption class="art-caption"><span>03 · Dubai · VAE</span><strong>De skyline bij zonsondergang</strong><span class="art-coordinates">25°12′ N &nbsp;·&nbsp; 55°16′ E</span></figcaption>
+      </figure>
+      <div class="destination-banner"><div class="banner-detail"><span>Hoe lang</span><strong>5–6 dagen</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Koelere maanden</span><strong>Nov. – maart</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Vervoer</span><strong>Metro · abra · taxi</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Valuta</span><strong>VAE-dirham</strong></div></div>
+      <div class="content-grid">
+        <div>
+          <div class="content-block"><h3>Zes dagen in Dubai</h3>
+            <ol class="timeline">
+              <li><span class="time-label">Dag 1</span><div><strong>Al Fahidi en de Creek</strong><p>Ik begin in de oude wijk Al Fahidi. Daarna steek ik met een abra de Creek over en kijk ik rond op de souks in Deira. Ik houd het rustig; na de reis hoef ik niet meteen alles te zien.</p></div></li>
+              <li><span class="time-label">Dag 2</span><div><strong>Downtown en de Burj Khalifa</strong><p>Ik wandel rond Downtown en bezoek Dubai Mall. Als ik naar boven wil in de Burj Khalifa, reserveer ik vooraf een tijdslot. Tegen de avond blijf ik in de buurt om de skyline verlicht te zien.</p></div></li>
+              <li><span class="time-label">Dag 3</span><div><strong>Een ochtend aan zee</strong><p>Ik kies Jumeirah of Kite Beach en ga vroeg, voordat het te warm wordt. Als ik de moskee bezoek, kijk ik of er een rondleiding is en houd ik rekening met de kledingregels.</p></div></li>
+              <li><span class="time-label">Dag 4</span><div><strong>Een uitstap naar de woestijn</strong><p>Ik boek bij een aanbieder die duidelijk uitlegt wat de tocht inhoudt en hoe het vervoer geregeld is. Liever iets rustigers? Dan zoek ik een natuurgebied of een wandeling met een gids.</p></div></li>
+              <li><span class="time-label">Dag 5</span><div><strong>Kunst en lunch in Al Quoz</strong><p>Ik neem een kijkje bij de galeries en ateliers van Alserkal Avenue. Daarna kies ik ergens een plek om te eten en laat ik de rest van de middag open.</p></div></li>
+              <li><span class="time-label">Dag 6</span><div><strong>De laatste ochtend</strong><p>Ik haal nog wat dadels of kruiden en maak een laatste wandeling. Daarna vertrek ik op tijd naar de luchthaven; Dubai is groter dan het soms op de kaart lijkt.</p></div></li>
+            </ol>
+          </div>
+          <div class="content-block"><h3>Waar ik wil verblijven</h3><p>Ik zoek een hotel of appartement dicht bij een metrostation. <strong>Downtown</strong> is handig voor de Burj Khalifa en Dubai Mall; <strong>Deira of Bur Dubai</strong> voor de Creek en de oude wijken; <strong>Marina/JBR</strong> als ik liever dicht bij het strand zit. De afstanden zijn groot, dus ik plan mijn dagen per buurt. Voor de laatste stukken kan ik de bus, tram of taxi nemen. Voor ik vertrek kijk ik bij RTA de routes, tijden en betaalmogelijkheden na.</p></div>
+          <div class="content-block"><h3>Een paar dingen om rekening mee te houden</h3><p>Voor vertrek lees ik het reisadvies, controleer ik de visumregels die voor mij gelden en zoek ik op wat handig is om te weten over lokale gebruiken en kleding. Ik vraag toestemming voordat ik mensen fotografeer. Omdat het buiten warm kan zijn, plan ik wandelingen liefst vroeg of later op de dag. Voor een woestijntocht kijk ik goed wat de excursie inhoudt, waar het vervoer me ophaalt en wat de annuleringsregels zijn.</p></div>
+        </div>
+        <aside>
+          <div class="side-card"><h3>Praktische informatie</h3><ul class="detail-list"><li><span>Luchthaven</span><strong>Dubai International (DXB)</strong></li><li><span>Rondreizen</span><strong>Metro, tram &amp; taxi</strong></li><li><span>Betalen</span><strong>VAE-dirham (AED)</strong></li><li><span>Vooraf checken</span><strong>Reisadvies en kledingnormen</strong></li></ul></div>
+          <div class="side-card"><h3>Handig bij het plannen</h3><p>Ik zet bezienswaardigheden die bij elkaar liggen op dezelfde dag. Buiten zijn doe ik liever in de ochtend of later op de dag; op het heetst van de dag zoek ik een museum, lunchplek of andere plek met airconditioning op.</p></div>
+          <div class="side-card"><h3>Voor vertrek controleren</h3><ul><li>Paspoortgeldigheid, visumvoorwaarden voor mijn nationaliteit en actueel reisadvies.</li><li>Metro- en tramdienstregeling, betaalkaart en vervoer vanaf de luchthaven.</li><li>Vooraf reserveren van populaire attracties, rondleidingen en excursies.</li><li>Temperatuur, kledingnormen en eventuele aangepaste openingstijden tijdens Ramadan.</li></ul></div>
+          <div class="side-card"><h3>Op mijn lijstje</h3><div class="checklist" data-list="dubai"><label class="check-row"><input type="checkbox" data-key="dubai-culture"><span>Al Fahidi en de abra opzoeken</span></label><label class="check-row"><input type="checkbox" data-key="dubai-tickets"><span>Tickets voor de Burj Khalifa bekijken</span></label><label class="check-row"><input type="checkbox" data-key="dubai-advice"><span>Reisadvies en lokale gebruiken lezen</span></label></div></div>
+          <div class="side-card note-card"><div class="eyebrow">Niet vergeten</div><p>Ik wil ook tijd maken voor de Creek en de souks. Die lijken me minstens zo interessant als de skyline.</p></div>
+          <div class="side-card"><h3>Officiële links</h3><ul class="source-links"><li><a href="https://www.visitdubai.com/en/" target="_blank" rel="noopener noreferrer">Visit Dubai: wijken &amp; bezoekersinformatie ↗</a></li><li><a href="https://www.rta.ae/wps/portal/rta/ae/public-transport" target="_blank" rel="noopener noreferrer">Dubai RTA: metro, tram, bus &amp; abra ↗</a></li><li><a href="https://u.ae/en/information-and-services/visa-and-emirates-id/visa-information" target="_blank" rel="noopener noreferrer">VAE-overheid: visuminformatie ↗</a></li><li><a href="https://www.nederlandwereldwijd.nl/reisadvies/verenigde-arabische-emiraten" target="_blank" rel="noopener noreferrer">NederlandWereldwijd: reisadvies VAE ↗</a></li></ul></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="iceland" role="tabpanel" aria-labelledby="tab-iceland" hidden>
+      <div class="destination-head">
+        <div><div class="eyebrow">04 · IJsland · Noord-Atlantische Oceaan</div><h2>Een roadtrip door <em>IJsland.</em></h2><p class="intro">Ik wil de watervallen en gletsjers met eigen ogen zien en onderweg stoppen waar het mooi is. Voor mijn eerste reis lijkt de zuidkust me een goede plek om te beginnen.</p></div>
+        <div class="stamp"><small>op mijn lijst</small>Vuur<br>&amp; ijs</div>
+      </div>
+      <figure class="destination-art art-iceland">
+        <img class="art-photo" src="assets/images/iceland-waterfall.jpg" alt="Waterval stort van een groene klif in een rivierdal in IJsland" width="702" height="469" loading="lazy" decoding="async">
+        <figcaption class="art-caption"><span>04 · IJsland · zuidkust</span><strong>De zuidkust op eigen tempo</strong><span class="art-coordinates">64°08′ N &nbsp;·&nbsp; 21°56′ W</span></figcaption>
+      </figure>
+      <div class="destination-banner"><div class="banner-detail"><span>Hoe lang</span><strong>8–10 dagen</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Route</span><strong>Golden Circle · zuidkust</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Vervoer</span><strong>Huurauto · wandelen</strong></div><div class="banner-divider">✳</div><div class="banner-detail"><span>Valuta</span><strong>IJslandse kroon</strong></div></div>
+      <div class="content-grid">
+        <div>
+          <div class="content-block"><h3>Een route van tien dagen</h3>
+            <ol class="timeline">
+              <li><span class="time-label">Dag 1</span><div><strong>Aankomst in Reykjavík</strong><p>Ik check in en maak een wandeling door het centrum en langs de haven. Als er nog tijd is, bezoek ik Hallgrímskirkja of Harpa en haal ik wat eten voor onderweg.</p></div></li>
+              <li><span class="time-label">Dag 2</span><div><strong>De Golden Circle</strong><p>Ik vertrek op tijd voor Þingvellir, het geothermische gebied Geysir en Gullfoss. Ik blijf op de aangegeven paden en neem mijn tijd bij de stops.</p></div></li>
+              <li><span class="time-label">Dag 3</span><div><strong>Seljalandsfoss en Skógafoss</strong><p>Ik rijd over weg 1 richting de zuidkust en stop bij de watervallen. Voor ik uitstap kijk ik naar het weer en de omstandigheden; rond watervallen kunnen stenen glad zijn en kan het hard waaien.</p></div></li>
+              <li><span class="time-label">Dag 4</span><div><strong>Vík en de kust</strong><p>Ik verken de omgeving van Vík en houd op het zwarte strand ruim afstand van de zee. Sneaker waves kunnen onverwacht ver het strand op komen. Ik let op waarschuwingen en ga nooit met mijn rug naar het water staan.</p></div></li>
+              <li><span class="time-label">Dag 5</span><div><strong>Skaftafell</strong><p>Ik maak een wandeling in Vatnajökull National Park en overnacht in de buurt, bijvoorbeeld bij Skaftafell of Kirkjubæjarklaustur. Een gletsjer op gaan doe ik alleen met een gids en de juiste uitrusting.</p></div></li>
+              <li><span class="time-label">Dag 6</span><div><strong>Jökulsárlón en Höfn</strong><p>Ik bezoek de gletsjerlagune en Diamond Beach en rijd daarna door naar Höfn. Ik blijf op veilige afstand van het ijs en volg de borden bij het strand.</p></div></li>
+              <li><span class="time-label">Dag 7</span><div><strong>Op mijn gemak terugrijden</strong><p>Ik rijd westwaarts en kijk onderweg waar ik nog wil stoppen. Als het weer of de weg niet meewerkt, sla ik een stop over in plaats van door te haasten.</p></div></li>
+              <li><span class="time-label">Dag 8</span><div><strong>Terug naar Reykjavík</strong><p>Ik rijd verder naar Reykjavík. Een omweg via Reykjanes maak ik alleen als de wegen en veiligheidsinformatie dat toelaten; anders houd ik de middag vrij in de stad.</p></div></li>
+              <li><span class="time-label">Dag 9–10</span><div><strong>Ruimte om mijn plannen aan te passen</strong><p>Ik houd de laatste dagen vrij voor Reykjavík, een museum of een extra stop die onderweg goed uitkomt. Zo hoef ik niet elk plan door te zetten als het weer omslaat.</p></div></li>
+            </ol>
+          </div>
+          <div class="content-block"><h3>Waar ik kan overnachten</h3><p>Ik boek liefst op een paar plekken langs de route, zodat ik niet elke dag lange afstanden hoef te rijden: Reykjavík voor het begin en einde, Hella of Flúðir bij de Golden Circle, Vík aan de zuidkust en Skaftafell, Kirkjubæjarklaustur of Höfn voor de gletsjerlagune. Voor ik iets boek, kijk ik naar de rijtijd en de weg. Bij winterweer maak ik de route korter.</p></div>
+          <div class="content-block"><h3>Voorzichtig onderweg</h3><p>Het weer en de wegomstandigheden kunnen snel veranderen. Daarom kijk ik voor vertrek op <a href="https://umferdin.is/en" target="_blank" rel="noopener noreferrer">umferdin.is voor wegen en verkeer</a>, <a href="https://safetravel.is/" target="_blank" rel="noopener noreferrer">Safetravel.is voor veiligheidsmeldingen</a> en <a href="https://en.vedur.is/" target="_blank" rel="noopener noreferrer">de IJslandse weerdienst</a>. Ik blijf op de paden en wegen die voor bezoekers bedoeld zijn. Off-road rijden mag niet. F-wegen neem ik alleen als ze open zijn en mijn auto daarvoor geschikt is. Ik stop niet op een gevaarlijke plek om een foto te maken.</p></div>
+        </div>
+        <aside>
+          <div class="side-card"><h3>De route kort samengevat</h3><ul class="detail-list"><li><span>Start &amp; einde</span><strong>Keflavík / Reykjavík</strong></li><li><span>Route</span><strong>Golden Circle &amp; zuidkust</strong></li><li><span>Rijtijd</span><strong>Per dag controleren</strong></li><li><span>Overnachtingen</span><strong>Reykjavík · Hella · Vík · Höfn</strong></li><li><span>Vervoer</span><strong>Huurauto, toegestane wegen</strong></li><li><span>Inpakken</span><strong>Regenkleding en stevige schoenen</strong></li></ul></div>
+          <div class="side-card"><h3>Wanneer wil ik gaan?</h3><p><strong>In de zomer</strong> zijn de dagen lang en kan ik meer stops maken. Ik boek mijn auto en verblijf wel op tijd. <strong>In de winter</strong> is er kans op noorderlicht, maar zijn de dagen kort en het rijden lastiger. Dan plan ik kortere ritten en houd ik een dag vrij voor slecht weer.</p></div>
+          <div class="side-card"><h3>Een auto huren</h3><p>Ik kies een auto die past bij de route en lees goed welke schade de verzekering wel en niet dekt, bijvoorbeeld schade door grind of harde wind. Ik rijd niet door rivieren en neem geen F-weg tenzij die open is en de auto ervoor geschikt is.</p></div>
+          <div class="side-card"><h3>Op mijn lijstje</h3><div class="checklist" data-list="iceland"><label class="check-row"><input type="checkbox" data-key="iceland-car"><span>Auto en verblijf vergelijken</span></label><label class="check-row"><input type="checkbox" data-key="iceland-roads"><span>Weg- en veiligheidsinformatie opslaan</span></label><label class="check-row"><input type="checkbox" data-key="iceland-layers"><span>Regenkleding en warme lagen klaarleggen</span></label><label class="check-row"><input type="checkbox" data-key="iceland-time"><span>Een extra dag vrijhouden</span></label></div></div>
+          <div class="side-card note-card"><div class="eyebrow">Om te onthouden</div><p>Ik hoef niet koste wat kost de hele route af te maken. Als het weer omslaat of de wegen slecht zijn, pas ik mijn plannen aan.</p></div>
+          <div class="side-card"><h3>Officiële links</h3><ul class="source-links"><li><a href="https://www.visiticeland.com/" target="_blank" rel="noopener noreferrer">Visit Iceland: regio’s &amp; activiteiten ↗</a></li><li><a href="https://umferdin.is/en" target="_blank" rel="noopener noreferrer">Umferðin: actuele wegen &amp; verkeer ↗</a></li><li><a href="https://safetravel.is/" target="_blank" rel="noopener noreferrer">SafeTravel: veiligheidsinformatie ↗</a></li><li><a href="https://en.vedur.is/" target="_blank" rel="noopener noreferrer">Icelandic Met Office: weer &amp; waarschuwingen ↗</a></li><li><a href="https://www.nederlandwereldwijd.nl/reisadvies/ijsland" target="_blank" rel="noopener noreferrer">NederlandWereldwijd: reisadvies IJsland ↗</a></li></ul></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="shell footer-inner"><span>Verre Verlangens · Mijn reisplannen.</span><span>Controleer data, openingstijden en reisadvies voor vertrek.</span></div>
+  </footer>
+  <script>
+    (() => {
+      const buttons = [...document.querySelectorAll('[data-page]')];
+      const tabs = [...document.querySelectorAll('[role="tab"][data-page]')];
+      const pages = [...document.querySelectorAll('[role="tabpanel"]')];
+
+      function showPage(id, updateHash = true) {
+        const page = document.getElementById(id);
+        if (!page) return;
+        pages.forEach((panel) => {
+          const selected = panel.id === id;
+          panel.classList.toggle('active', selected);
+          panel.hidden = !selected;
+        });
+        tabs.forEach((tab) => {
+          const selected = tab.dataset.page === id;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        if (updateHash && window.location.hash !== `#${id}`) history.replaceState(null, '', `#${id}`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      buttons.forEach((button) => button.addEventListener('click', () => showPage(button.dataset.page)));
+      tabs.forEach((tab, index) => tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0
+          : event.key === 'End' ? tabs.length - 1
+          : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[next].focus();
+        showPage(tabs[next].dataset.page);
+      }));
+      window.addEventListener('hashchange', () => showPage(window.location.hash.slice(1), false));
+      const initialPage = window.location.hash.slice(1);
+      showPage(pages.some((page) => page.id === initialPage) ? initialPage : 'home', false);
+
+      document.querySelectorAll('.checklist input[type="checkbox"]').forEach((checkbox) => {
+        const key = `verre-verlangens:${checkbox.dataset.key}`;
+        checkbox.checked = localStorage.getItem(key) === 'true';
+        checkbox.addEventListener('change', () => localStorage.setItem(key, String(checkbox.checked)));
+      });
+    })();
+  </script>
+</body>
+</html>
